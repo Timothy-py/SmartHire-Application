@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true
       });
 
+      models.User.belongsTo(models.Role, {
+        allowNull: true
+      })
+
       models.User.hasMany(models.Skillpool);
 
       models.User.belongsToMany(models.Skill, {
