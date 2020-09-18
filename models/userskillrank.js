@@ -14,9 +14,21 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Userskillrank.init({
-    DepartmentId: DataTypes.INTEGER,
-    user_rank: DataTypes.ENUM,
-    skillName: DataTypes.STRING
+    DepartmentId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isInt: true
+      }
+    },
+    user_rank: {
+      type: DataTypes.ENUM('1','2','3','4','5','6','7','8','9','10'),
+      allowNull: true
+    },
+    skillName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Userskillrank',

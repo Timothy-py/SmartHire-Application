@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Skill.init({
-    skillName: DataTypes.STRING,
-    dept_rank: DataTypes.ENUM
+    skillName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    dept_rank: {
+      type: DataTypes.ENUM('1','2','3','4','5','6','7','8','9','10'),
+      allowNull: true
+    }
   }, {
     sequelize,
     modelName: 'Skill',

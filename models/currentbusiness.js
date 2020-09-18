@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   CurrentBusiness.init({
-    current_business_name: DataTypes.STRING
+    current_business_name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'CurrentBusiness',

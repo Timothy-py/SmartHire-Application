@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Goaldetail.init({
-    detail: DataTypes.STRING,
-    status: DataTypes.ENUM
+    detail: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    status: {
+      type: DataTypes.ENUM('done', 'undone'),
+      defaultValue: 'undone'
+    }
   }, {
     sequelize,
     modelName: 'Goaldetail',

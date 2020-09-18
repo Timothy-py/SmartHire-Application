@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Goal.init({
-    goalName: DataTypes.STRING,
-    target_date: DataTypes.DATE
+    goalName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    target_date: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Goal',

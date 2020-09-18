@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Department.init({
-    department_name: DataTypes.STRING
+    department_name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Department',

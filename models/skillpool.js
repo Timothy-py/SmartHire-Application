@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Skillpool.init({
-    skillpoolName: DataTypes.STRING
+    skillpoolName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Skillpool',
