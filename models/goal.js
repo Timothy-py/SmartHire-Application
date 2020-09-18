@@ -11,6 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Goal.belongsTo(models.User, {
+        as: 'user', foreignKey: 'UserId', onDelete: 'CASCADE'
+      });
+
+      models.Goal.hasMany(models.Goaldetail, {
+        as: 'goaldetail'
+      });
     }
   };
   Goal.init({

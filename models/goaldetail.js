@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Goaldetail.belongsTo(models.Goal, {
+        as: 'goal', foreignKey: 'GoalId', onDelete: 'CASCADE'
+      });
     }
   };
   Goaldetail.init({

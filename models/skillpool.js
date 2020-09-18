@@ -11,6 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Skillpool.belongsTo(models.Department, {
+        onDelete: 'CASCADE'
+      });
+
+      models.Skillpool.belongsTo(models.CurrentBusines, {
+        onDelete: 'CASCADE'
+      });
+
+      models.Skillpool.belongsTo(models.User, {
+        as: 'manager', foreignKey: 'UserId'
+      });
+
+      models.Skillpool.hasMany(models.Skill, {
+        as: 'skills'
+      });
     }
   };
   Skillpool.init({

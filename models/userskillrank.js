@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Userskillrank.belongsTo(models.User, {
+        as: 'user', foreignKey: 'UserId'
+      });
     }
   };
   Userskillrank.init({

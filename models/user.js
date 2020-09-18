@@ -11,6 +11,27 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.User.belongsTo(models.Department, {
+        allowNull: true
+      });
+
+      models.User.belongsTo(models.CurrentBusiness, {
+        allowNull: true
+      });
+
+      models.User.hasMany(models.Skillpool);
+
+      models.User.belongsToMany(models.Skill, {
+        as: 'skills', through: 'UserSkills', foreignKey: 'SkillId'
+      });
+
+      models.User.hasMany(models.Goal, {
+        as: 'goals'
+      });
+
+      models.User.hasMany(models.Userskillrank, {
+        as: 'ranks'
+      })
     }
   };
   User.init({

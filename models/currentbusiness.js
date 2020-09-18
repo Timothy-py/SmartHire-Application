@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.CurrentBusiness.hasMany(models.User);
+
+      models.CurrentBusiness.hasMany(models.Skillpool);
     }
   };
   CurrentBusiness.init({

@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Department.hasMany(models.User);
+
+      models.Department.hasOne(models.Skillpool);
     }
   };
   Department.init({
