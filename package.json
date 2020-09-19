@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon ./bin/www"
+    "start:dev": "nodemon ./bin/www",
+    "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "sequelize-auto-migrations": "^1.0.3"
   }
 }

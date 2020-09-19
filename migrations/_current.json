@@ -1,0 +1,45 @@
+{
+    "tables": {
+        "CurrentBusinesses": {
+            "tableName": "CurrentBusinesses",
+            "indexes": []
+        },
+        "Departments": {
+            "tableName": "Departments",
+            "indexes": []
+        },
+        "Goals": {
+            "tableName": "Goals",
+            "indexes": []
+        },
+        "Goaldetails": {
+            "tableName": "Goaldetails",
+            "indexes": []
+        },
+        "Roles": {
+            "tableName": "Roles",
+            "indexes": []
+        },
+        "Skills": {
+            "tableName": "Skills",
+            "indexes": []
+        },
+        "Skillpools": {
+            "tableName": "Skillpools",
+            "indexes": []
+        },
+        "Users": {
+            "tableName": "Users",
+            "indexes": []
+        },
+        "Userskillranks": {
+            "tableName": "Userskillranks",
+            "indexes": []
+        },
+        "UserSkills": {
+            "tableName": "UserSkills",
+            "indexes": []
+        }
+    },
+    "revision": 1
+}

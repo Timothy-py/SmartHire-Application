@@ -12,15 +12,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.Skillpool.belongsTo(models.Department, {
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE', as: 'department', foreignKey: 'DepartmentId'
       });
 
-      models.Skillpool.belongsTo(models.CurrentBusines, {
-        onDelete: 'CASCADE'
+      models.Skillpool.belongsTo(models.CurrentBusiness, {
+        onDelete: 'CASCADE', as: 'currentbusiness', foreignKey: 'CurrentBusinessId'
       });
 
       models.Skillpool.belongsTo(models.User, {
-        as: 'manager', foreignKey: 'UserId'
+        as: 'manager', foreignKey: 'UserId', onDelete: 'CASCADE'
       });
 
       models.Skillpool.hasMany(models.Skill, {

@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       goalName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       target_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -21,7 +23,16 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      // UserId: {
+      //   type: Sequelize.INTEGER,
+      //   onDelete: 'CASCADE',
+      //   references: {
+      //     model: 'User',
+      //     key: 'id',
+      //     as: 'user'
+      //   }
+      // },
     });
   },
   down: async (queryInterface, Sequelize) => {

@@ -12,18 +12,23 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.User.belongsTo(models.Department, {
-        allowNull: true
+        allowNull: true,
+        as: 'department', foreignKey: 'DepartmentId'
       });
 
       models.User.belongsTo(models.CurrentBusiness, {
-        allowNull: true
+        allowNull: true,
+        as: 'currentbusiness', foreignKey: 'CurrentBusinessId'
       });
 
       models.User.belongsTo(models.Role, {
-        allowNull: true
+        allowNull: true,
+        as: 'role', foreignKey: 'RoleId'
       })
 
-      models.User.hasMany(models.Skillpool);
+      models.User.hasMany(models.Skillpool, {
+        as: 'skillpool'
+      });
 
       models.User.belongsToMany(models.Skill, {
         as: 'skills', through: 'UserSkills', foreignKey: 'SkillId'

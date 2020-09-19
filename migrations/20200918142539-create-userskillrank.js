@@ -9,13 +9,19 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       DepartmentId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        validate: {
+          isInt: true
+        }
       },
       user_rank: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('1','2','3','4','5','6','7','8','9','10'),
+        allowNull: true
       },
       skillName: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -24,7 +30,16 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      // UserId: {
+      //   type: Sequelize.INTEGER,
+      //   onDelete: 'CASCADE',
+      //   references: {
+      //     model: 'User',
+      //     key: 'id',
+      //     as: 'user'
+      //   }
+      // },
     });
   },
   down: async (queryInterface, Sequelize) => {
