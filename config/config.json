@@ -2,17 +2,17 @@
   "development": {
     "username": "timothy",
     "password": "plati442",
-    "database": "smarthireDB",
+    "database": "smarthiredb",
     "host": "127.0.0.1",
-    "port": "5432",
+    "port": 5432,
     "dialect": "postgres"
   },
   "test": {
     "username": "timothy",
     "password": "plati442",
-    "database": "smarthireDB",
+    "database": "smarthiredb",
     "host": "127.0.0.1",
-    "port": "5432",
+    "port": 5432,
     "dialect": "postgres"
   },
   "production": {

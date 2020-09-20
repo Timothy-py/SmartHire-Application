@@ -9,12 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       detail: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       status: {
-        type: Sequelize.ENUM('done', 'undone'),
-        defaultValue: 'undone'
+        type: Sequelize.ENUM
       },
       createdAt: {
         allowNull: false,
@@ -23,16 +21,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      // GoalId: {
-      //   type: Sequelize.INTEGER,
-      //   onDelete: 'CASCADE',
-      //   references: {
-      //     model: 'Goal',
-      //     key: 'id',
-      //     as: 'goal'
-      //   }
-      // },
+      }
     });
   },
   down: async (queryInterface, Sequelize) => {
