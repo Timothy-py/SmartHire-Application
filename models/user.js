@@ -13,16 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.User.belongsTo(models.Department, {
         allowNull: true,
-        as: 'department', foreignKey: 'DepartmentId'
+        as: 'department', foreignKey: 'DepartmentId', onDelete: 'SET NULL', onUpdate: 'CASCADE'
       });
 
       models.User.belongsTo(models.CurrentBusiness, {
-        allowNull: true,
+        allowNull: true, onDelete: 'SET NULL', onUpdate: 'CASCADE',
         as: 'currentbusiness', foreignKey: 'CurrentBusinessId'
       });
 
       models.User.belongsTo(models.Role, {
-        allowNull: true,
+        allowNull: true, onDelete: 'SET NULL', onUpdate: 'CASCADE',
         as: 'role', foreignKey: 'RoleId'
       })
 

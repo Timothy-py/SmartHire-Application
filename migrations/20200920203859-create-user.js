@@ -14,14 +14,28 @@ module.exports = {
       last_name: {
         type: Sequelize.STRING
       },
+      username: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+          len: [3, 40]
+      }
+      },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: false,
+        validate: {
+          isEmail: true
+      }
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       status: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('active', 'inactive'),
+        defaultValue: "active"  
       },
       createdAt: {
         allowNull: false,
@@ -30,7 +44,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {

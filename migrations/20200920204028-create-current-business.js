@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       current_business_name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

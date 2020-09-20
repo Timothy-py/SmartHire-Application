@@ -9,10 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       detail: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       status: {
-        type: Sequelize.ENUM
+        type: Sequelize.ENUM('done', 'undone'),
+        defaultValue: 'undone'
       },
       createdAt: {
         allowNull: false,
@@ -21,7 +23,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
