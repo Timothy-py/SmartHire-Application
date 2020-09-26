@@ -1,11 +1,18 @@
 const express = require("express");
 const logger = require("morgan");
 const bodyParser =  require("body-parser");
+var path =  require('path');
+const bcrypt = require('bcrypt');
+const session =  require('express-session');
+const passport = require('passport');
+
+// authenticate user with passport
+const initializePassport =  require("./passportConfig");
+initializePassport(passport);
 
 // require routes
 const index = require("./routes/index");
-const login =  require("./routes/login");
-const main =  require("./routes/main")
+const api =  require("./routes/api");
 
 // initialize express
 var app = express();
@@ -17,15 +24,22 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// setup a default home route
-app.get("/", (req, res)=>{
-    res.status(200).send({message: "Welcome to SmartHire API"})
-})
+// store user session data
+app.use(
+    session({
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: false
+    })
+);
+
+// user passport middleware
+app.use(passport.initialize);
+app.use(passport.session);
 
 // use routes
 app.use('/', index);
-app.use('/login', login);
-app.use('/smarthire/main', main);
+app.use('/smarthire/api', api);
 
 // export the app
 module.exports = app;

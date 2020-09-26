@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       models.User.belongsTo(models.Department, {
         allowNull: true,
         as: 'department', foreignKey: 'DepartmentId', onDelete: 'SET NULL', onUpdate: 'CASCADE'
-      });
+      }); 
 
       models.User.belongsTo(models.CurrentBusiness, {
         allowNull: true, onDelete: 'SET NULL', onUpdate: 'CASCADE',
