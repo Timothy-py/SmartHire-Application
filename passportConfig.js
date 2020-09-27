@@ -1,6 +1,6 @@
 const LocalStrategy = require("passport-local").Strategy
 const bcrypt =  require("bcrypt");
-var models = require('../models')
+var models = require('./models')
 
 
 function initialize(passport) {
@@ -37,9 +37,9 @@ function initialize(passport) {
         )
     )
 
-    passport.serializeuser((user, done)=>{null, user.id});
+    passport.serializeUser((user, done)=>{null, user.id});
 
-    passport.deserializeuser(async (id, done)=>{
+    passport.deserializeUser(async (id, done)=>{
         await models.findByPk(id)
         .then((user)=>{
             console.log("User deserialized successfully")

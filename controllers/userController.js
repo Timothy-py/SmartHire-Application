@@ -1,5 +1,6 @@
 var models = require('../models')
-var bcrypt = require('bcrypt')
+var bcrypt = require('bcrypt');
+const passport = require('passport');
 
 // Sign up
 exports.postUserCreate = async (req, res, next)=>{
@@ -38,4 +39,18 @@ exports.postUserCreate = async (req, res, next)=>{
             status: false
         })
     })
+};
+
+// Login
+exports.postUserLogin = (req, res, next)=>{
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/users/login",
+        failureFlash: true
+    });
+
+    res.json({
+        message: 'User Logged in succcessfully',
+        status: true
+    });
 };
