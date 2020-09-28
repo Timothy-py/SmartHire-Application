@@ -50,27 +50,6 @@ exports.postUserCreate = async (req, res, next)=>{
     }
 };
 
-// Login
-exports.postUserLogin = (req, res, next)=>{
-    console.log("Logged in successfully")
-    res.status(200).send({
-        message: 'Logged in successfully',
-        status: true
-    })
-
-};
-
-// Logout
-exports.getUserLogout = (req, res, next)=>{
-    req.logOut();
-    // req.flash("success_msg", "You have logged out");
-    // res.redirect("/users/login");
-    res.json({
-        message: 'Logged out successfully',
-        status: true
-    })
-};
-
 // Dashboard
 exports.getDashboard = (req, res, next)=>{
 

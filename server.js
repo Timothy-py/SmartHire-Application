@@ -42,11 +42,19 @@ app.set('passport', passport);
 app.use('/', index);
 app.use('/smarthire/api', api);
 
+// User Login
 app.post('/login', passport.authenticate("local", {
     successMessage: "Logged in successfully",
     failureMessage: "Failed to log in"}), (req, res)=>{
-        res.status(200).send({message: "Logged in successfully"})
+        res.status(200).send({message: `Logged in successfully as user, ${req.body.email}`})
     });
+// User Logout
+app.get('/logout', (req, res, next)=>{
+    req.logout();
+    res.status(200).send({
+        message: "Logged Out Successfully"
+    })
+})
 
 // export the app
 module.exports = app;
