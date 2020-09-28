@@ -5,10 +5,8 @@ var path =  require('path');
 const bcrypt = require('bcrypt');
 const session =  require('express-session');
 const passport = require('passport');
-
-// authenticate user with passport
 const initializePassport =  require("./passportConfig");
-initializePassport(passport);
+
 
 // require routes
 const index = require("./routes/index");
@@ -33,13 +31,22 @@ app.use(
     })
 );
 
+// authenticate user with passport
+initializePassport(passport);
 // user passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+app.set('passport', passport);
 
 // use routes
 app.use('/', index);
 app.use('/smarthire/api', api);
+
+app.post('/login', passport.authenticate("local", {
+    successMessage: "Logged in successfully",
+    failureMessage: "Failed to log in"}), (req, res)=>{
+        res.status(200).send({message: "Logged in successfully"})
+    });
 
 // export the app
 module.exports = app;
