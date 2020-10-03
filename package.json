@@ -12,7 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/Timothy-py/SmartHire-API.git"
   },
-  "keywords": [],
+  "keywords": [
+    "heroku"
+  ],
+  "engines": {
+    "node": "14.x"
+  },
   "author": "Timothy",
   "license": "ISC",
   "bugs": {
