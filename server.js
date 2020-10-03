@@ -75,5 +75,5 @@ app.use((err, req, res, next)=>{
     })
 }) 
 
-// export the app
+// export the module
 module.exports = app;
