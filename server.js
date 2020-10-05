@@ -3,7 +3,7 @@ const logger = require("morgan");
 const bodyParser =  require("body-parser");
 var path =  require('path');
 const bcrypt = require('bcrypt');
-const session =  require('express-session');
+const session =  require('cookie-session');
 const passport = require('passport');
 const initializePassport =  require("./passportConfig");
 
@@ -30,7 +30,12 @@ app.use(
     session({
         secret: 'secret',
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: true,
+        cookie: {
+            secureProxy: true,
+            httpOnly: true,
+            domain: 'cookie.com'
+        }
     })
 );
 
