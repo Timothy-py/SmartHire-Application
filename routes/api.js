@@ -6,6 +6,7 @@ var userController = require('../controllers/userController');
 var skillpoolController = require('../controllers/skillpoolController');
 var skillController = require('../controllers/skillController');
 var roleController = require('../controllers/roleController');
+var departmentController = require('../controllers/departmentController');
 
 
 // POST USER SIGNUP
@@ -54,6 +55,18 @@ router.get('/role/:role_id', roleController.getRoleDetails);
 // Get request for role List
 router.get('/roles', roleController.getRoleList);
 
+
+// DEPARTMENT ROUTES
+// POST request for creating a department
+router.post('/department/create', departmentController.postDepartmentCreate);
+// GET request for deleting a department
+router.get('/department/:department_id/delete', departmentController.getDepartmentDelete);
+// Post request for updating a department
+router.post('/department/:department_id/update', departmentController.postDepartmentUpdate);
+// Get request for department details
+router.get('/department/:department_id', departmentController.getDepartmentDetails);
+// Get request for department List
+router.get('/departments', departmentController.getDepartmentList);
 
 module.exports = router;
 
