@@ -11,9 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.CurrentBusiness.hasMany(models.User);
+      models.CurrentBusiness.hasMany(models.User, {
+        as: 'members'
+      });
 
-      models.CurrentBusiness.hasMany(models.Skillpool);
+      models.CurrentBusiness.hasMany(models.Skillpool, {
+        as: 'skillpool'
+      });
     }
   };
   CurrentBusiness.init({

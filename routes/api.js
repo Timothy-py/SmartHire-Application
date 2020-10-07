@@ -7,6 +7,7 @@ var skillpoolController = require('../controllers/skillpoolController');
 var skillController = require('../controllers/skillController');
 var roleController = require('../controllers/roleController');
 var departmentController = require('../controllers/departmentController');
+var currentbusinessController = require('../controllers/currentbusinessController');
 
 
 // POST USER SIGNUP
@@ -67,6 +68,19 @@ router.post('/department/:department_id/update', departmentController.postDepart
 router.get('/department/:department_id', departmentController.getDepartmentDetails);
 // Get request for department List
 router.get('/departments', departmentController.getDepartmentList);
+
+
+// CURRENTBUSINESS ROUTES
+// POST request for creating a currentbusiness
+router.post('/currentbusiness/create', currentbusinessController.postCurrentbusinessCreate);
+// GET request for deleting a currentbusiness
+router.get('/currentbusiness/:currentbusiness_id/delete', currentbusinessController.getCurrentbusinessDelete);
+// Post request for updating a currentbusiness
+router.post('/currentbusiness/:currentbusiness_id/update', currentbusinessController.postCurrentbusinessUpdate);
+// Get request for currentbusiness details
+router.get('/currentbusiness/:currentbusiness_id', currentbusinessController.getCurrentbusinessDetails);
+// Get request for currentbusiness List
+router.get('/currentbusinesses', currentbusinessController.getCurrentbusinessList);
 
 module.exports = router;
 
