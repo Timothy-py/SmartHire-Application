@@ -12,20 +12,20 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.Skillpool.belongsTo(models.Department, {
-        onDelete: 'CASCADE', as: 'department', foreignKey: 'DepartmentId'
+        as: 'department', foreignKey: 'DepartmentId', onDelete: 'CASCADE'
       });
 
       models.Skillpool.belongsTo(models.CurrentBusiness, {
-        onDelete: 'CASCADE', as: 'currentbusiness', foreignKey: 'CurrentBusinessId'
+          onDelete: 'CASCADE', as: 'currentbusiness', foreignKey: 'CurrentBusinessId'
       });
 
       models.Skillpool.belongsTo(models.User, {
-        as: 'manager', foreignKey: 'UserId', onDelete: 'CASCADE'
+          as: 'manager', foreignKey: 'UserId', onDelete: 'SET NULL'
       });
 
       models.Skillpool.hasMany(models.Skill, {
-        as: 'skills'
-      });
+          as: 'skills'
+      })
     }
   };
   Skillpool.init({

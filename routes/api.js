@@ -8,6 +8,7 @@ var skillController = require('../controllers/skillController');
 var roleController = require('../controllers/roleController');
 var departmentController = require('../controllers/departmentController');
 var currentbusinessController = require('../controllers/currentbusinessController');
+var goalController = require("../controllers/goalController");
 
 
 // POST USER SIGNUP
@@ -16,7 +17,7 @@ router.post('/user/signup', userController.postUserCreate);
 // DASHBOARD
 router.get('/', userController.getDashboard);
 
-// SKILLPOOL ROUTES
+// // SKILLPOOL ROUTES
 // POST request for creating a skillpool
 router.post('/skillpool/create', skillpoolController.postSkillpoolCreate);
 // GET request for deleting a skillpool
@@ -81,6 +82,25 @@ router.post('/currentbusiness/:currentbusiness_id/update', currentbusinessContro
 router.get('/currentbusiness/:currentbusiness_id', currentbusinessController.getCurrentbusinessDetails);
 // Get request for currentbusiness List
 router.get('/currentbusinesses', currentbusinessController.getCurrentbusinessList);
+
+
+// GOAL ROUTES
+// Post request API for creating Goal
+router.post('/goal/create', goalController.postGoalCreate);
+// Get request for deleting Goal
+router.get('/goal/:goal_id/delete', goalController.getGoalDelete);
+// Post API request for updating Goal
+router.post('/goal/:goal_id/update', goalController.postGoalUpdate);
+// Get request for Goal details
+router.get('/goal/:goal_id', goalController.getGoalDetails);
+// GET request to list all Goals of a User
+router.get('/goals/user', goalController.getUserGoals);
+// Get request for Goal List by of users in a department
+router.get('/goals/department', goalController.getGoalListByDepartment);
+// Get request for Goal List
+router.get('/goals', goalController.getGoalList);
+// GET request API for User Goal and Target aggregate
+router.get('/goals/aggregate', goalController.getGoalAggregate);
 
 module.exports = router;
 

@@ -7,29 +7,29 @@ exports.postSkillpoolCreate = async (req, res, next)=>{
 
     console.log(`User ID ${req.user.id}`);
     console.log(`Department ID ${req.user.DepartmentId}`);
+    console.log(`Current Business ID ${req.user.CurrentBusinessId}`)
 
-    try {
-        var skillpool = await models.Skillpool.create({
-            skillpoolName: req.body.skillpoolName,
-            DepartmentId: req.user.DepartmentId,
-            CurrentBusinessId: req.user.CurrentBusinessId,
-            UserId: req.user.id
-        })
-
+    await models.Skillpool.create({
+        skillpoolName: req.body.skillpoolName,
+        DepartmentId: req.user.DepartmentId,
+        CurrentBusinessId: req.user.CurrentBusinessId,
+        UserId: req.user.id
+    })
+    .then((skillpool)=>{
         res.json({
-            message: `SKillpool Created Successfully for Department: ${req.user.DepartmentId}`,
+            message: "Skillpool Created Successfully",
             data: skillpool,
             status: true
-        });
-        console.log("SKillpool created successfully");
-        
-    } catch (error) {
-        console.log('There was an error creating the Skillpool: ' + error); 
-            res.json({
-                message: `There was an error creating the skillpool: ${error}`,
-                status: false
-            })
-    }
+        })
+        console.log("Skillpool created successfully")
+    })
+    .catch((error)=>{    
+        console.log(`There was an error creating the Skillpool: ${error}`)
+        res.json({
+            message: `There was an error creating the Skillpool: ${error}`,
+            status: false
+        })
+    })  
 
 };
 
@@ -164,9 +164,9 @@ exports.getSkillpoolDetails = async function(req, res, next) {
 
 
 // Display all Skillpools on GET request
-exports.getSkillpoolList = function(req, res, next) {
+exports.getSkillpoolList = async function(req, res, next) {
     
-    models.Skillpool.findAll({
+    await models.Skillpool.findAll({
         include: [
         {
             model: models.User,

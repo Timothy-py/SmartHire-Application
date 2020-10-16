@@ -5,7 +5,8 @@ const passport = require('passport');
 // Sign up
 exports.postUserCreate = async (req, res, next)=>{
 
-    var {username, email, password} = req.body
+    var {firstName, lastName, username, email,
+         password, DepartmentId, CurrentBusinessId, RoleId} = req.body
 
     // first find the db if the user exist
     let user = await models.User.findOne({
@@ -21,9 +22,14 @@ exports.postUserCreate = async (req, res, next)=>{
         let hashedPassword = await bcrypt.hash(password, 10);
 
         await models.User.create({
+            first_name: firstName,
+            last_name: lastName,
             username: username,
             email: email,
-            password: hashedPassword
+            password: hashedPassword,
+            DepartmentId: DepartmentId,
+            CurrentBusinessId: CurrentBusinessId,
+            RoleId: RoleId
         })
         .then((user)=>{
     
