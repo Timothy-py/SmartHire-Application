@@ -9,6 +9,7 @@ var roleController = require('../controllers/roleController');
 var departmentController = require('../controllers/departmentController');
 var currentbusinessController = require('../controllers/currentbusinessController');
 var goalController = require("../controllers/goalController");
+var goaldetailController = require("../controllers/goaldetailController");
 
 
 // POST USER SIGNUP
@@ -101,6 +102,23 @@ router.get('/goals/department', goalController.getGoalListByDepartment);
 router.get('/goals', goalController.getGoalList);
 // GET request API for User Goal and Target aggregate
 router.get('/goals/aggregate', goalController.getGoalAggregate);
+
+
+// GOALDETAIL ROUTES
+// Post request for creating goal details for a Goal
+router.post('/goaldetail/:goal_id/create', goaldetailController.GoalAddGoaldetail);
+// Get request for deleting Goaldetail
+router.get('/goaldetail/:goaldetail_id/delete', goaldetailController.getGoaldetailDelete);
+// Post request for updating Goaldetail
+router.post('/goaldetail/:goaldetail_id/goal/:goal_id/update', goaldetailController.postGoaldetailUpdate);
+// Get request for updating the status of a goaldetail
+router.post('/goaldetail/:goal_id/status', goaldetailController.GoaldetailChangeStatus);
+// Get request for Goaldetail details
+router.get('/goaldetail/:goaldetail_id', goaldetailController.getGoaldetailDetails);
+// Get request for listing the goal-details of a Goal
+router.get('/goaldetails/goal/:goal_id', goaldetailController.getGoalGoaldetails);
+// Get request for Goaldetail List
+router.get('/goaldetails', goaldetailController.getGoaldetailList);
 
 module.exports = router;
 
