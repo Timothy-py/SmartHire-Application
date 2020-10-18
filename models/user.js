@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       models.User.belongsToMany(models.Skill, {
-        as: 'skills', through: 'UserSkills', foreignKey: 'SkillId'
+        as: 'skills', through: 'UserSkills', foreignKey: 'UserId'
       });
 
       models.User.hasMany(models.Goal, {

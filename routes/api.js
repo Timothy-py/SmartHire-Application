@@ -12,8 +12,15 @@ var goalController = require("../controllers/goalController");
 var goaldetailController = require("../controllers/goaldetailController");
 
 
+// USER ROUTES
 // POST USER SIGNUP
 router.post('/user/signup', userController.postUserCreate);
+// Post request API for adding Skills to a User
+router.post('/user/addskills', userController.UserAddSkills);
+// GET request API for USER SKILL MATRIX
+router.get('/user/skillmatrix', userController.UserSkillMatrix);
+// GET ALL USERS
+router.get('/users', userController.getAllUsers);
 
 // DASHBOARD
 router.get('/', userController.getDashboard);
@@ -119,6 +126,7 @@ router.get('/goaldetail/:goaldetail_id', goaldetailController.getGoaldetailDetai
 router.get('/goaldetails/goal/:goal_id', goaldetailController.getGoalGoaldetails);
 // Get request for Goaldetail List
 router.get('/goaldetails', goaldetailController.getGoaldetailList);
+
 
 module.exports = router;
 
