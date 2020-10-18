@@ -10,6 +10,7 @@ var departmentController = require('../controllers/departmentController');
 var currentbusinessController = require('../controllers/currentbusinessController');
 var goalController = require("../controllers/goalController");
 var goaldetailController = require("../controllers/goaldetailController");
+var userskillrankController =  require("../controllers/userskillrankController");
 
 
 // USER ROUTES
@@ -126,6 +127,16 @@ router.get('/goaldetail/:goaldetail_id', goaldetailController.getGoaldetailDetai
 router.get('/goaldetails/goal/:goal_id', goaldetailController.getGoalGoaldetails);
 // Get request for Goaldetail List
 router.get('/goaldetails', goaldetailController.getGoaldetailList);
+
+
+// USERSKILLRANK ROUTES
+// POST Request API for updating user skill rank
+// router.post('/userskillrank/:skill_id/update', userskillrankController.updateRank);
+router.post('/userskillrank/update', userskillrankController.updateRank);
+router.get('/userskillrank/:skill_id/delete', userskillrankController.deleteSkill);
+
+// GET Request API to list all Skills for a User in a Department
+router.get('/userskillrank/skills/user', userskillrankController.getSkillByUser);
 
 
 module.exports = router;
