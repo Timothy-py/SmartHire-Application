@@ -19,6 +19,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      skillpoolId: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

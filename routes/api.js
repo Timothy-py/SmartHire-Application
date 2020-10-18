@@ -33,17 +33,17 @@ router.get('/skillpools', skillpoolController.getSkillpoolList);
 
 // SKILL ROUTES
 // POST Request API for creating a Skill for a Skillpool
-// router.post('/skill/create', skillController.postSkillCreate);
-// // Get request for deleting Skill
-// router.get('/skill/:skill_id/delete', skillController.getSkillDelete);
-// // Post request for updating Skill
-// router.post('/skill/:skill_id/updateapi', skillController.postSkillUpdateAPI);
-// // Get request for Skill details
-// router.get('/skill/:skill_id', skillController.getSkillDetails);
-// // GET Request API to list all Skills for a Department
-// router.get('/skills/department', skillController.getSkillByDepartment);
-// // Get request for Skill List
-// router.get('/skills', skillController.getSkillList);
+router.post('/skill/create', skillController.postSkillCreate);
+// Get request for deleting Skill
+router.get('/skill/:skill_id/delete', skillController.getSkillDelete);
+// Post request for updating Skill
+router.post('/skill/:skill_id/update', skillController.postSkillUpdate);
+// Get request for Skill details
+router.get('/skill/:skill_id', skillController.getSkillDetails);
+// GET Request API to list all Skills for a Department
+router.get('/skills/department', skillController.getSkillByDepartment);
+// Get request for Skill List
+router.get('/skills', skillController.getSkillList);
 
 
 // ROLE ROUTES

@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       models.Skillpool.hasMany(models.Skill, {
-          as: 'skills'
+          as: 'skills', foreignKey: 'id'
       })
     }
   };
@@ -32,7 +32,11 @@ module.exports = (sequelize, DataTypes) => {
     skillpoolName: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    skillpoolId: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    } 
   }, {
     sequelize,
     modelName: 'Skillpool',
