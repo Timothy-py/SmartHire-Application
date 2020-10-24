@@ -1,0 +1,74 @@
+<!-- begin:: Page -->
+<div class="kt-grid kt-grid--ver kt-grid--root">
+    <div class="kt-grid__item   kt-grid__item--fluid kt-grid  kt-grid kt-grid--hor kt-login-v2" id="kt_login_v2">
+
+        <!--begin::Item-->
+        <div class="kt-grid__item  kt-grid--hor">
+
+            <!--begin::Heade-->
+            <div class="kt-login-v2__head">
+                <div class="kt-login-v2__logo">
+                    <a href="/">
+                        <img src="/assets/media/logos/logo-5.png" alt="" />
+                    </a>
+                </div>
+                <div class="kt-login-v2__signup">
+                    <% if (title == 'Login') { %>
+                        <span>Don't have an account?</span>
+                        <a href="/signup" class="kt-link kt-font-brand">Signup</a>
+                    <% } else { %>
+                        <span>Have an account?</span>
+                        <a href="/login" class="kt-link kt-font-brand">Login</a>
+                    <% } %>
+                </div>
+            </div>
+
+            <!--begin::Head-->
+        </div>
+
+        <!--end::Item-->
+
+        <!--begin::Item-->
+        <div class="kt-grid__item  kt-grid  kt-grid--ver  kt-grid__item--fluid">
+
+            <!--begin::Body-->
+            <div class="kt-login-v2__body">
+
+                <!--begin::Wrapper-->
+                <%- include ('../content/base') %>
+                
+
+                <!--end::Wrapper-->
+
+                <!--begin::Image-->
+                <div class="kt-login-v2__image">
+                    <img src="/assets/media/misc/bg_icon.svg" alt="">
+                </div>
+
+                <!--begin::Image-->
+            </div>
+
+            <!--begin::Body-->
+        </div>
+
+        <!--end::Item-->
+
+        <!--begin::Item-->
+        <div class="kt-grid__item">
+            <div class="kt-login-v2__footer">
+                <div class="kt-login-v2__link">
+                    <a href="#" class="kt-link kt-font-brand">Privacy</a>
+                    <a href="#" class="kt-link kt-font-brand">Legal</a>
+                    <a href="#" class="kt-link kt-font-brand">Contact</a>
+                </div>
+                <div class="kt-login-v2__info">
+                    <a href="#" class="kt-link">&copy; 2018 KeenThemes</a>
+                </div>
+            </div>
+        </div>
+
+        <!--end::Item-->
+    </div>
+</div>
+
+<!-- end:: Page -->

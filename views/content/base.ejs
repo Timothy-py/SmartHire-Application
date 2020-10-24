@@ -1,0 +1,34 @@
+<% switch (page) {
+case 'homePage' : %>
+       <%- include ('../content/dashboard') %>
+       <% break;
+
+case 'authPage' : %>
+       <%- include ('../content/auth/auth-content') %>
+       <% break;
+ 
+case 'skillpoolPage' : %>
+<%- include ('../content/skillpool/skillpool-content') %>
+       <% break;
+
+case 'skillPage' : %>
+<%- include ('../content/skill/skill-content') %>
+       <% break;
+       
+case 'goalPage' : %>
+<%- include ('../content/goal/goal-content') %>
+       <% break;
+
+case 'goaldetailPage' : %>
+<%- include ('../content/goaldetail/goaldetail-content') %>
+       <% break;
+       
+case 'errorPage' : %>
+<%- include ('../content/error') %>
+       <% break;
+
+
+default : %>
+       <%- include ('../content/dashboard') %>
+       <%  
+} %>

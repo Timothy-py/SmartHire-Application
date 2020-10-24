@@ -1,0 +1,126 @@
+<% if(message.length > 0) { %>
+	<div class="alert alert-success" style="margin:auto"><%= message %></div>
+<% } %>
+
+
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+	<div class="kt-portlet kt-portlet--mobile">
+		<div class="kt-portlet__head kt-portlet__head--lg">
+			<div class="kt-portlet__head-label">
+				<h3 class="kt-portlet__head-title">
+					Details for : <%= goal.data.goalName %>
+				</h3>
+			</div>
+				<div class="kt-portlet__head-label">
+				<h4 class="kt-portlet__head-title">
+					Percent Complete: <%= Math.round(goal.percent_complete) %>%
+				</h4>
+			</div>
+				
+			<div class="kt-portlet__head-toolbar">
+				<div class="kt-portlet__head-wrapper">
+					<% if (goaldetails.length >= 10) { %>
+						<a href="#" class="btn btn-danger btn-bold btn-upper btn-font-sm" style="cursor:not-allowed">
+							<i class="la la-plus"></i>
+							Add Details
+						</a>
+					<% } else { %>
+						<a href="#" class="btn btn-brand btn-bold btn-upper btn-font-sm" data-toggle="modal" data-target="#addGoaldetail">
+						<i class="la la-plus"></i>
+						Add Details
+					</a>
+					</a>
+					<% } %>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="addGoaldetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							
+							<form name="addDetail" class="px-8 py-8" id="addGoaldetail" action="../<%= goal.data.id %>/create" method="POST" onsubmit="return validateForm()">
+								
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Goal Detail</h5>
+								</div>
+								<div class="modal-body form-group">
+									<label for="detail">Detail:</label><br>
+									<input class="form-control col-10" type="text" id="detail" name="detail" value=""><br>
+								</div>
+								<div class="modal-footer">
+									<input type="submit" class="btn btn-outline-primary" value="Add">
+									<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
+								</div>
+							</div>
+								
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="kt-portlet__foot">
+		<div class="form-group">
+				
+			<form action="/smarthire/main/goaldetail/update/<%= goal.data.id %>/goal" method="POST">
+				<div class="kt-checkbox-list">
+		            <% goaldetails.forEach(function(detail) { 
+		            	var checked = false
+		            	if(detail.status == 'done'){
+		                    	checked = "checked"
+		                    }
+		            %>
+		             
+	                <label class="kt-checkbox kt-checkbox--bold kt-checkbox--success" for="<%= detail.id %>"><%= detail.detail %>
+	                	<input type="checkbox" class='detailCheckbox' name="details" id="<%= detail.id %>" 
+	                	value = "<%= detail.id %>" <%= checked %>>
+	                	<span></span>
+	                </label>
+		       
+		            <% }); %>
+		            	
+						<div class="kt-form__actions">
+							<button type="submit" class="btn btn-success" onClick="checkDetail()">Update</button>
+					</div>
+		        </div>	
+            </form>
+		</div>
+		</div>
+		
+	</div>
+</div>
+
+
+<script>
+    function checkDetail() {
+    var checkBoxes = document.getElementsByClassName( 'detailCheckbox' );
+    var isChecked = false;
+    for (var i = 0; i < checkBoxes.length; i++) {
+        if ( checkBoxes[i].checked ) {
+            isChecked = true;
+        };
+    };
+}
+
+
+function validateForm() {
+  var x = document.forms["addDetail"]["detail"].value;
+  if ((x) == "") {
+		Swal.fire({
+	  icon: 'error',
+	  title: 'Oops...',
+	  text: 'Detail must be filled out!',
+	})
+    return false;
+  }else if(x.length < 3){
+  	Swal.fire({
+	  icon: 'error',
+	  title: 'Oops...',
+	  text: 'Detail too short!',
+	})
+    return false;
+  }
+}
+</script>

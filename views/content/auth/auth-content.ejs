@@ -1,0 +1,16 @@
+<!--auth VIEW STARTS HERE -->
+<!--complete logic for auth view-->
+<% switch (display) {
+    case 'login' : %>
+            <%- include ('../../content/auth/login') %>
+            <% break;
+     
+    case 'signup' : %>
+            <%- include ('../../content/auth/signup') %>
+            <% break;
+ 
+    default : %>
+           <%- include ('../../pages/index') %>
+           <%  
+    } %>
+     

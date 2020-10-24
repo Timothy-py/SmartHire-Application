@@ -1,0 +1,110 @@
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+
+	<div class="kt-portlet kt-portlet--mobile">
+	    
+	    <% if ( (skillpool == 'no skillpool') && (role_name == 'Manager') ) { %>
+            
+            <div class="kt-portlet__head-label">
+				<h3 class="kt-portlet__head-title">
+					There is no Skillpool for your department yet
+				</h3><br>
+				<!--SKILLPOOL CREATE BUTTON-->
+				
+				<div class="kt-portlet__head-toolbar">
+				<div class="kt-portlet__head-wrapper">
+					<a href="#" class="btn btn-brand btn-bold btn-upper btn-font-sm" data-toggle="modal" data-target="#createSkillpool">
+						<i class="la la-plus"></i>
+						Create Skillpool
+					</a>
+					<!-- Modal -->
+					<div class="modal fade" id="createSkillpool" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							
+							<form id="createSkillpool" action="./skillpool/create" method="POST">
+								
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Skillpool</h5>
+								</div>
+								<div class="modal-body">
+									<label for="skillpool">Name:</label><br>
+									<input type="text" id="skillpool" name="skillpoolName" value=""><br>
+								</div>
+								<div class="modal-footer">
+									<input type="submit" class="btn btn-outline-brand" value="Create">
+									<button type="button" class="btn btn-outline-brand" data-dismiss="modal">Cancel</button>
+								</div>
+							</div>
+								
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+				
+				
+		    </div>
+            
+        <% } else if ((skillpool == 'no skillpool') && (role_name != 'Manager')) { %>
+            <div class="kt-portlet__head-label">
+				<h3 class="kt-portlet__head-title">
+					There is no Skillpool for your department yet
+				</h3>
+		    </div>
+        <% } else { %>
+        
+        	<div class="kt-portlet__foot">
+        		<div class="kt-portlet__head-label">
+					<h3 class="kt-portlet__head-title">
+						<%= skillpool[0].skillpool.skillpoolName %>
+					</h3>
+			    </div>
+			    
+			    
+				<div class="form-group">
+						
+					<form action="/smarthire/main/skill/add" method="POST">
+						<div class="kt-checkbox-list">
+				            <% skillpool.forEach(function(skill) { 
+			                  		var checked = false
+			                        if(user_skills.includes(skill.skillName)){
+			                        	checked = "checked"
+			                        }
+			                  %>
+				             
+				            <label class="kt-checkbox kt-checkbox--bold kt-checkbox--success" for="<%= skill.id %>"><%= skill.skillName %>
+				            	<input type="checkbox" class='skillCheckbox' name="skills" id="<%= skill.id %>" 
+				            	value = "<%= skill.id %>" <%= checked %>>
+				            	<span></span>
+				            </label>
+				       
+				            <% }); %>
+				            	
+								<div class="kt-form__actions">
+									<button type="submit" class="btn btn-success" onClick="checkSkill()">Add Skills</button>
+							</div>
+				        </div>	
+				    </form>
+				</div>
+			</div>
+        <!---->
+            
+        <% } %>
+	    
+	</div>
+</div>
+
+
+<script>
+    function checkSkill() {
+    var checkBoxes = document.getElementsByClassName( 'skillCheckbox' );
+    var isChecked = false;
+    for (var i = 0; i < checkBoxes.length; i++) {
+        if ( checkBoxes[i].checked ) {
+            isChecked = true;
+        };
+    };
+}
+
+</script>

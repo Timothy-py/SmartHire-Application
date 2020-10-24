@@ -1,0 +1,153 @@
+/*
+ *
+ * Base content styles
+ *
+ */
+
+.content-wrapper {
+    /* These styles are required for the "scroll-over" effect */
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    min-height: 12%;
+    z-index: 2;
+}
+
+.content {
+    padding: 0 1em 1em 1em;
+}
+
+/*
+ *
+ * Menu related styles
+ *
+ */
+
+nav {
+    display: block;
+    background: black;
+    position: fixed;
+    width: 100%;
+    min-height: 40px;
+    z-index: 999;
+}
+
+nav, nav a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+nav a {
+    display: block;
+    padding: 10px;
+}
+
+nav a:hover {
+    background: #444;
+    color: #ccc;
+}
+
+nav ul {
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    float: left;
+    display: inline;
+    position: relative;
+}
+
+nav ul li ul {
+    left: 0;
+    top: 100%;
+}
+
+nav ul li ul li {
+    background: black;
+}
+
+/*Hide all submenus*/
+
+nav ul ul {
+    display: none;
+}
+
+nav li:hover>ul {
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    width: 220px;
+}
+
+nav li:hover>ul li {
+    width: 220px;
+}
+
+nav ul ul li:hover>ul {
+    right: -220px;
+    top: 0;
+    left: auto;
+}
+
+nav .menu-selected>a {
+    font-weight: bold;
+    color: #FFF;
+}
+
+/*Hide checkbox and label by default*/
+
+nav>input, nav>label {
+    display: none;
+}
+
+nav>label {
+    width: 100%;
+    float: left;
+    padding: 10px;
+    padding-right: 0;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/*Media query*/
+
+@media (max-width: 600px) {
+    nav>label, nav ul li ul {
+        display: block;
+    }
+    nav>ul {
+        display: none;
+        clear: both;
+    }
+    nav>input:checked+ul {
+        display: block;
+    }
+    nav ul ul li a:before {
+        content: '↪ ';
+        display: inline;
+    }
+    nav ul li {
+        float: none;
+        display: block;
+        border-right: none;
+        padding-left: 10px;
+    }
+    nav li:hover ul {
+        position: relative;
+        width: auto;
+    }
+    nav li:hover>ul li {
+        width: auto;
+    }
+    nav ul ul li:hover>ul {
+        right: auto;
+        top: auto;
+        left: auto;
+    }
+}

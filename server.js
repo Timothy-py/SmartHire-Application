@@ -6,14 +6,26 @@ const bcrypt = require('bcrypt');
 const session =  require('cookie-session');
 const passport = require('passport');
 const initializePassport =  require("./passportConfig");
+const ejsLayouts = require('express-ejs-layouts');
+var flash = require("connect-flash");
+
 
 
 // require routes
 const index = require("./routes/index");
-const api =  require("./routes/api");
+// const api =  require("./routes/api");
+const main = require("./routes/smarthireMain");
 
 // initialize express
 var app = express();
+
+
+// Handlebars / HBS setup and configuration
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.set('layout', 'layouts/main');
+app.use(ejsLayouts)
 
 // log requests to the console
 app.use(logger("dev"));
@@ -25,19 +37,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 // trust first proxy
 app.set('trust proxy', 1)
 
-// store user session data
-app.use(
-    session({
-        secret: 'secret',
-        resave: false,
-        saveUninitialized: true,
-        cookie: {
-            secureProxy: true,
-            httpOnly: true,
-            domain: 'cookie.com'
-        }
-    })
-);
+
 
 // authenticate user with passport
 initializePassport(passport);
@@ -48,20 +48,20 @@ app.set('passport', passport);
 
 // use routes
 app.use('/', index);
-app.use('/smarthire/api', api);
+app.use('/smarthire/main', main);
 
 // User Login
-app.post('/login', passport.authenticate("local", {
-    successMessage: "Logged in successfully",
-    failureMessage: "Failed to log in"}), (req, res)=>{
-        res.status(200).send({message: `Logged in successfully as user, ${req.body.email}`})
-    });
+app.post('/login', passport.authenticate("local", { 
+    failureRedirect: '/smarthire/main'
+    }), (req, res)=>{   
+        res.redirect('/smarthire/main/home')
+    }
+);
+
 // User Logout
 app.get('/logout', (req, res, next)=>{
     req.logout();
-    res.status(200).send({
-        message: "Logged Out Successfully"
-    })
+    res.redirect('/smarthire/main');
 })
 
 // catch 404 and forward to error handler
@@ -78,10 +78,34 @@ app.use((err, req, res, next)=>{
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     // return a 404 response
-    res.status(err.status || 500).send({
-        message: "Page can not be found!"
-    })
+    res.status(err.status || 500);
+    var viewData = {
+        parent: 'Home',
+        parentUrl: '/home',
+        title: 'Error',
+        user: req.user,
+        error: err,
+        page: 'errorPage',
+        layout: 'layouts/auth'
+    }
+    res.render('pages/error', viewData);
 }) 
+
+
+// store user session data
+// for flash messages
+app.use(
+    session({
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            secureProxy: true,
+            httpOnly: true,
+            domain: 'cookie.com'
+        }
+    })
+);
 
 // export the module
 module.exports = app;

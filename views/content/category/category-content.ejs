@@ -1,0 +1,75 @@
+<!--CATEGORY VIEW START HERE-->
+<!--complete logic for category view-->
+<% if (title == 'Create Category') { %>
+    <div class="col-sm-8">    
+        <div class="jumbotron">
+            <form action="" method="post">
+              Category Name:<br>
+              <input type="text" name="name" value="Category Name">
+              <br><br>
+              <input type="submit" value="Create Category">
+            </form>
+        </div>
+    </div>
+<% } else if (title == 'Delete Category') { %>
+     
+<% } else if (title == 'Update Category') { %>
+    <div class="col-sm-8">    
+        <div class="jumbotron">
+            <form action="/blog/category/<%= category.id %>/update" method="post">
+               Category Name:<br>
+              <input type="text" name="name" value="<%= category.name %>">
+              <br><br>
+              <input type="submit" value="Update Category">
+            </form>
+        </div>
+    </div>
+<% } else if (title == 'Category Details') { %>
+    <div class="col-sm-8">    
+        <div class="">
+             <h1>Details of a Single category - <%= category.name %></h1>
+             <p>I am an category for this ID = <%= category.id %></p>
+             <p>Category Name: <%= category.name %></p>
+             <a href="/blog/category/<%= category.id %>/update">Edit  Category</a> | <a href="/blog/category/<%= category.id %>/delete">Delete Category</a>
+        </div>
+        
+        <% if(category.posts.length == 0) { %>
+            <h2>There are no posts under this category yet </h2>
+        <% } else { %>
+            <h2>All Posts in this Category</h2>
+            <div class="">
+                <ol>
+                <% category.posts.forEach(function(post) { %>
+                        <li>
+                            <p><%= post.post_title %>
+                               <%= post.post_body %>
+                                <br/><a href="/blog/post/<%= post.id %>/update">Edit  Post</a> | <a href="/blog/post/<%= post.id %>/delete">Delete Post</a>
+                            </p>
+                        </li>
+                    <br/>
+                <% }); %>
+                </ol>
+            </div>    
+         <% } %>  
+    </div>
+<% } else if (title == 'Category List') { %>
+    <div class="col-sm-8">    
+        <div class="">
+        <ol>
+        <% categories.forEach(function(category) { %>
+                <li>
+                    <h4><a href="/blog/category/<%= category.id %>"><%= category.name %></a></h4>
+                    <p>The main body of the category <%= category.name %></p>
+                     <a href="/blog/category/<%= category.id %>/update">Edit  Category</a> | <a href="/blog/category/<%= category.id %>/delete">Delete Category</a>
+                </li>
+            <br/>
+        <% }); %>
+        </ol>
+    </div>
+        <a href="/blog/category/create"> CLICK HERE TO CREATE CATEGORY</a>
+
+    </div>
+<% } else { %>
+
+<% } %>
+<!--CATEGORY VIEW END HERE-->

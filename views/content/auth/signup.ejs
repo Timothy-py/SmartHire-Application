@@ -1,0 +1,38 @@
+<div class="kt-login-v2__wrapper">
+	<div class="kt-login-v2__container">
+		<div class="kt-login-v2__title">
+			<h3>Register Account</h3>
+		</div>
+
+		<!--begin::Form-->
+		<form class="kt-login-v2__form kt-form" action="" autocomplete="off" id="kt_login_form">
+			<div class="form-group">
+				<input class="form-control" type="text" placeholder="Username" name="username" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="password" placeholder="Password" name="password" autocomplete="off">
+			</div>
+
+			<!--begin::Action-->
+			<div class="kt-login-v2__actions">
+				
+				<button type="submit" class="btn btn-brand btn-elevate btn-pill" id="kt_login_submit">Register</button>
+			</div>
+
+			<!--end::Action-->
+		</form>
+
+		<!--end::Form-->
+
+		<!--begin::Separator-->
+		<div class="kt-separator kt-separator--space-lg  kt-separator--border-solid"></div>
+
+		<!--end::Separator-->
+
+		<!--begin::Options-->
+		<%- include ('../../content/auth/socials') %>
+		
+
+		<!--end::Options-->
+	</div>
+</div>

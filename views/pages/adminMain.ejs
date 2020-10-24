@@ -1,0 +1,9 @@
+<%- contentFor('main-content') %>
+<p><%=adminContents %></p>
+
+<h4>Users in the database:</h4>
+<ul>
+<% users.forEach(function(user) { %>
+    <li><%=user.id %>; <%= user.username %> <%= user.email %>; <%= user.password %>
+<% }); %>
+</ul>

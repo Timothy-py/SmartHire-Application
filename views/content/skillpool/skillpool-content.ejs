@@ -1,0 +1,16 @@
+<!--BOOK VIEW STARTS HERE -->
+<!--complete logic for book view-->
+<% switch (display) {
+case 'skillpoolList' : %>
+       <%- include ('../../content/skillpool/skillpool-list') %>
+       <% break;
+ 
+case 'skillpoolDetail' : %>
+<%- include ('../../content/skillpool/skillpool-detail') %>
+       <% break;
+       
+default : %>
+       <%- include ('../../pages/index') %>
+       <%  
+} %>
+ 

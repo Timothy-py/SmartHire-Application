@@ -1,0 +1,22 @@
+<%- contentFor('left-sidebar') %>
+<%- include ('../partials/left-sidebar') %>
+<%- contentFor('main-content') %>
+<% switch (page) {
+case 'authorPage' : %>
+       <%- include ('../content/author/author-content') %>
+       <% break;
+ 
+case 'bookPage' : %>
+<%- include ('../content/book/book-content') %>
+       <% break;
+      
+default : %>
+       <%- include ('../pages/index') %>
+       <%  
+} %>
+<%- contentFor('right-sidebar') %>
+<%- include ('../partials/right-sidebar') %>
+
+
+
+ 

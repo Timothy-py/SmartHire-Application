@@ -1,0 +1,16 @@
+<!--BOOK VIEW STARTS HERE -->
+<!--complete logic for book view-->
+<% switch (display) {
+    case 'goaldetailList' : %>
+           <%- include ('../../content/goaldetail/goaldetail-list') %>
+           <% break;
+     
+    case 'goaldetailDetail' : %>
+    <%- include ('../../content/goaldetail/goaldetail-detail') %>
+           <% break;
+           
+    default : %>
+           <%- include ('../../pages/index') %>
+           <%  
+    } %>
+     

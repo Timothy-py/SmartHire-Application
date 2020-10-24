@@ -4,78 +4,53 @@ const { Strategy } = require("passport-local");
 var models = require('./models')
 
 
-// function initialize(passport) {
-
-//     const authenticateUser = async (req, email, password, done)=>{
-
-//         await models.User.findOne({
-//             where: {email: email}
-//         })
-//         .then((user)=>{
-
-//             if (user) {
-//                 bcrypt.compare(password, user.password, (err, isMatch)=>{
-//                     if (err) {
-//                         throw err
-//                     } 
-                    
-//                     if(isMatch) {
-//                         return done(null, user.get());
-//                     } else {
-//                         return done(null, false, {message: "Password is not correct."})
-//                     }
-//                 })
-//             } else {
-//                 return done(null, false, {message: "No User with that email address."})
-//             }
-
-//         })
-//         .catch((err)=>{
-//             console.log(`ERROR: ${err}`);
-//             return done(null, false);
-//         })
-//     }
-
-//     passport.use(
-//         new LocalStrategy(
-//             {
-//             usernameField: 'email',
-//             passwordField: 'password',
-//             passReqToCallback: true
-//         },
-//         authenticateUser
-//         )
-//     )
-
 function isValidPassword(userpass, password) {
     console.log("Comparing the passwords here...")
     return bcrypt.compareSync(password, userpass);
 }
 
+
 function initialize(passport) {
     console.log("Initializing passport...");
+    var msgs = {};
+
     passport.use('local', new Strategy({
         usernameField: 'email',
         passwordField: 'password',
         passReqToCallback: true
     },
+
     function (req, email, password, done) {
+        
         models.User.findOne({
             where: {email: email}
         })
         .then((user)=>{
+
             if (!user) {
                 console.log("User not found!")
+                // msgs.push("No User with that email address found")
+                msgs.message = "No User with that email address found"
                 return done(null, false, {message: "No user with that email address"})
             }
+
             if (!isValidPassword(user.password, password)) {
                 console.log("Password is incorrect")
-                return done(null, false, {message: "Password is incorrect"});
+                // msgs.push("Password is incorrect")
+                msgs.message = "Password is incorrect"
+                return done(null, false, msgs);
             }
+
             var userinfo = user.get();
-            console.log(`User Info: ${userinfo}`);
-            return done(null, userinfo);
+            console.log("User Info:");
+            console.log(userinfo)
+
+            // msgs.push("User Logged in successfully");
+            msgs.message = "User Logged in successfully"
+            return done(null, userinfo, msgs);
+
         }).catch((err)=>{
+
             console.log("Error:", err);
             return done(null, false);
         })
@@ -85,11 +60,14 @@ function initialize(passport) {
     passport.serializeUser((user, done)=>{done(null, user.id)});
 
     passport.deserializeUser(async (id, done)=>{
+
         await models.User.findByPk(id)
         .then((user)=>{
+
             console.log("User deserialized successfully")
             if (user) {
-                return done(null, user)
+
+                return done(null, user, msgs)
             } else {
                 return done(null, false)
             }

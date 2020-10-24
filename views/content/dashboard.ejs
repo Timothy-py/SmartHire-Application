@@ -1,0 +1,158 @@
+
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+	<!--begin::Row-->
+		<div class="row">
+			<div class="col-lg-6 col-xl-6 order-lg-1 order-xl-1">
+
+				<!--begin::Portlet-->
+				<div class="kt-portlet kt-portlet--fit kt-portlet--height-fluid">
+					<div class="kt-portlet__body kt-portlet__body--fluid">
+						<div class="kt-widget-3 kt-widget-3--brand">
+							<div class="kt-widget-3__content">
+								<div class="kt-widget-3__content-info">
+									<div class="kt-widget-3__content-section">
+										<div class="kt-widget-3__content-title">Goals</div><br>
+										<div class="kt-widget-3__content-desc">Total Number of Goals</div><br><br>
+										<div class="kt-widget-3__content-desc">Total Goal Points</div><br><br>
+									</div>
+									<div class="kt-widget-3__content-section">
+										<br>
+										<span class="kt-widget-3__content-number"><%= goals_and_targets.total_goals %></span><br>
+										<span class="kt-widget-3__content-number"><%= goals_and_targets.total_goals_archieved %></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--end::Portlet-->
+			</div>
+			<div class="col-lg-6 col-xl-6 order-lg-1 order-xl-1">
+
+				<!--begin::Portlet-->
+				<div class="kt-portlet kt-portlet--fit kt-portlet--height-fluid">
+					<div class="kt-portlet__body kt-portlet__body--fluid">
+						<div class="kt-widget-3 kt-widget-3--success">
+							<div class="kt-widget-3__content">
+								<div class="kt-widget-3__content-info">
+									<div class="kt-widget-3__content-section">
+										<div class="kt-widget-3__content-title">Targets</div><br>
+										<div class="kt-widget-3__content-desc">Total Number of Targets</div><br><br>
+										<div class="kt-widget-3__content-desc">Total Target Points</div><br><br>
+									</div>
+									<div class="kt-widget-3__content-section">
+										<br>
+										<span class="kt-widget-3__content-number"><%= goals_and_targets.total_targets %></span><br>
+										<span class="kt-widget-3__content-number"><%= goals_and_targets.total_targets_archieved %></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--end::Portlet-->
+			</div>
+			<!--<div class="col-lg-4 col-xl-4 order-lg-1 order-xl-1">-->
+
+				<!--begin::Portlet-->
+			<!--	<div class="kt-portlet kt-portlet--fit kt-portlet--height-fluid">-->
+			<!--		<div class="kt-portlet__body kt-portlet__body--fluid">-->
+			<!--			<div class="kt-widget-3 kt-widget-3--brand">-->
+			<!--				<div class="kt-widget-3__content">-->
+			<!--					<div class="kt-widget-3__content-info">-->
+			<!--						<div class="kt-widget-3__content-section">-->
+			<!--							<div class="kt-widget-3__content-title">Skills</div>-->
+			<!--							<div class="kt-widget-3__content-desc">Total Number of Skills</div>-->
+			<!--						</div>-->
+			<!--						<div class="kt-widget-3__content-section">-->
+			<!--							<span class="kt-widget-3__content-number"><%= skillmatrix.skillsName.length %></span>-->
+			<!--						</div>-->
+			<!--					</div>-->
+			<!--				</div>-->
+			<!--			</div>-->
+			<!--		</div>-->
+			<!--	</div>-->
+
+				<!--end::Portlet-->
+			<!--</div>-->
+		</div>
+</div>
+	<!--end::Row-->
+
+
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+	<!--begin::Row-->
+		<div class="row">
+			<div class="col-lg-6 col-xl-6 order-lg-1 order-xl-1">
+
+				<!--begin::Portlet-->
+				<div class="kt-portlet kt-portlet--fit kt-portlet--height-fluid">
+					<div class="kt-portlet__body kt-portlet__body--fluid">
+						<div class="kt-widget-3 kt-widget-3--brand">
+							<div class="kt-widget-3__content">
+								<div class="kt-widget-3__content-info">
+									<div class="kt-widget-3__content-section">
+										<div class="kt-widget-3__content-title">Skills</div><br>
+										<div class="kt-widget-3__content-desc">Total Number of Skills</div>
+									</div>
+									<div class="kt-widget-3__content-section">
+										<span class="kt-widget-3__content-number"><%= skillmatrix.skillsName.length %></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--end::Portlet-->
+			</div>
+				<!--begin::Portlet-->
+				
+				<% if (skillmatrix.matrix > 0) { %>
+				<div class="col-lg-6 col-xl-6 order-lg-1 order-xl-1">	
+					<div class="kt-portlet kt-portlet--fit kt-portlet--height-fluid">
+					<div class="kt-portlet__body kt-portlet__body--fluid">
+						<div class="kt-widget-3 kt-widget-3--success">
+							<div class="kt-widget-3__content">
+								<div class="kt-widget-3__content-info">
+									<div class="kt-widget-3__content-section">
+										<div class="kt-widget-3__content-title">Skill Matrix</div>
+									</div>
+									<div class="kt-widget-3__content-section">
+										<span class="kt-widget-3__content-number"><%= matrix %></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>		
+				<% } else { %>
+				<div class="col-lg-6 col-xl-6 order-lg-1 order-xl-1">	
+					<div class="kt-portlet kt-portlet--fit kt-portlet--height-fluid">
+					<div class="kt-portlet__body kt-portlet__body--fluid">
+						<div class="kt-widget-3 kt-widget-3--danger">
+							<div class="kt-widget-3__content">
+								<div class="kt-widget-3__content-info">
+									<div class="kt-widget-3__content-section">
+										<div class="kt-widget-3__content-title">Skill Matrix</div>
+									</div>
+									<div class="kt-widget-3__content-section">
+										<span class="kt-widget-3__content-number"><%= matrix %></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>	
+				<% } %>
+
+				<!--end::Portlet-->
+			</div>
+		</div>
+
+	<!--end::Row-->
+</div>

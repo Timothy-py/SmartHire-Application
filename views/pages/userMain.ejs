@@ -1,0 +1,16 @@
+<%- contentFor('main-content') %>
+<div class="jumbotron">
+<p><%= userContents %></p>
+
+<p>User information:</p>
+<ul>
+    <li>Session start date: <%= startDate %></li>
+    <li>Last request date: <%= endDate %></li>
+    <li>Firstname: <%= user.firstname %></li>
+    <li>Lastname: <%= user.lastname %></li>
+    <li>Email: <%= user.email %></li>
+    <li>ID: <%= user.id %></li>
+    <li>Last Login: <%= user.last_login %></li>
+</ul>
+
+</div>

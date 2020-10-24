@@ -1,0 +1,16 @@
+<!--BOOK VIEW STARTS HERE -->
+<!--complete logic for book view-->
+<% switch (display) {
+    case 'skillList' : %>
+           <%- include ('../../content/skill/skill-list') %>
+           <% break;
+     
+    case 'skillDetail' : %>
+    <%- include ('../../content/skill/skill-detail') %>
+           <% break;
+           
+    default : %>
+           <%- include ('../../pages/index') %>
+           <%  
+    } %>
+     
