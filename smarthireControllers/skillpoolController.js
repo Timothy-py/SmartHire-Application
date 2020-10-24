@@ -1,7 +1,7 @@
 var Roles = require("../models/role");
 const axios = require("axios");
 var models = require("../models");
-const { check, validationResult } = require('express-validator/check');
+// const { check, validationResult } = require('express-validator/check');
 
 
 // Endpoint for listing all the skills for a department
