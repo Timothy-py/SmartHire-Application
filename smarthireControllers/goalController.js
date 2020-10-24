@@ -1,7 +1,7 @@
 var models = require("../models");
 const axios = require("axios");
 const moment = require('moment');
-const { check, validationResult } = require('express-validator/check');
+// const { check, validationResult } = require('express-validator/check');
 
 
 // Endpoint for getting all the goals of a user
@@ -76,7 +76,7 @@ exports.postGoalUpdate = async function(req, res, next) {
     
     try {
         
-        let response1 = await axios.post(`https://smarthireapi.herokuapp.com/smarthire/api/goal/${req.params.goal_id}/updateapi`, {
+        let response1 = await axios.post(`https://smarthireapi.herokuapp.com/smarthire/api/goal/${req.params.goal_id}/update`, {
             goalName: req.body.goalName,
             target_date: req.body.target_date
         })
@@ -94,34 +94,8 @@ exports.postGoalUpdate = async function(req, res, next) {
 
 
 // Handle Goal Create on POST request API
-exports.postGoalCreate = [
-    
-    [
-        // check validations
-        check('goalName')
-        .isLength({
-            min: 3,
-            max: 40
-        }).withMessage('Goal Name must be between 3 and 40 characters long')
-        .not().isEmpty().withMessage('Goal Name cannot be empty'),
-        
-        check('target_date')
-        .isDate({
-            format: "YYYY/MM/DD"
-        }).withMessage('Invalid Date Input. Format YYYY/MM/DD expected')  
-        .not().isEmpty().withMessage('Target Date cannot be empty')
-    ],
-    
-    async function(req, res, next) {
-        // checks for validations
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({
-                status: false,
-                errors: errors.array()
-            });
-        }
-    
+exports.postGoalCreate = async (req, res, next) => {
+
     try{
         
         await models.Goal.create({
@@ -130,12 +104,6 @@ exports.postGoalCreate = [
             UserId: req.user.id
         })
         .then((goal) => {
-        
-            // res.json({
-            //     message: 'Goal Created successfully',
-            //     data: goal,
-            //     status: true
-            // })
             
             req.flash('message', 'Goal Created Successfully')
             res.redirect('/smarthire/main/goals');
@@ -151,8 +119,8 @@ exports.postGoalCreate = [
             status: false
         })
     }
-    } 
-];
+
+};
 
 
 // Endpoint for getting all the goals created by users in a department

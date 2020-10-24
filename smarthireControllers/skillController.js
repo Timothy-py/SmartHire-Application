@@ -1,5 +1,5 @@
 var models = require("../models");
-const { check, validationResult } = require('express-validator/check');
+// const { check, validationResult } = require('express-validator/check');
 const axios = require("axios");
 
 
@@ -66,35 +66,8 @@ exports.getSkillDelete = async function(req, res, next) {
 
 
 // API ENDPOINT FOR CREATING SKILL FOR A SKILLPOOL
-exports.postSkillCreate = [
-    
-    [
-        // check validations
-        check('skillName')
-        .isLength({
-            min: 2,
-            max: 15
-        }).withMessage('Skill Name must be between 2 and 15 characters long')
-        .not().isEmpty().withMessage('Skill Name cannot be empty'),
-        
-        check('dept_rank')
-        .isInt({
-            min: 1,
-            max: 10
-        }).withMessage('Rank must be between 1-10')
-        .not().isEmpty().withMessage('Department rank cannot be empty'),
-    ],
-    
-    async function(req, res, next) {
-        // checks for validations
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({
-                status: false,
-                errors: errors.array()
-            });
-    }
-    
+exports.postSkillCreate = async (req, res, next) => {
+
     // find the skillpool id of the current user department
     const skillpool = await models.Skillpool.findOne({
         where: {DepartmentId: req.user.DepartmentId, CurrentBusinessId: req.user.CurrentBusinessId}
@@ -120,9 +93,8 @@ exports.postSkillCreate = [
         })
         
     })
-    
-    }
-];
+
+};
 
 
 // Endpoint for Updating a Skill for a Skillpool
@@ -133,7 +105,7 @@ exports.postSkillUpdate = async function(req, res, next) {
     
     try {
         
-        let response1 = await axios.post(`https://smarthireapi.herokuapp.com/smarthire/api/skill/${req.params.skill_id}/updateapi`, {
+        let response1 = await axios.post(`https://smarthireapi.herokuapp.com/smarthire/api/skill/${req.params.skill_id}/update`, {
             skillName: req.body.skillName,
             dept_rank: req.body.dept_rank
         })

@@ -92,7 +92,7 @@ exports.postGoaldetailCreate = async function(req, res, next) {
     
     try {
         
-        let response1 = await axios.post(`https://smarthireapi.herokuapp.com/smarthire/api/goaldetail/${req.params.goal_id}/createapi`, {
+        let response1 = await axios.post(`https://smarthireapi.herokuapp.com/smarthire/api/goaldetail/${req.params.goal_id}/create`, {
             detail: req.body.detail,
             headers: {
               cookie: req.headers.cookie,

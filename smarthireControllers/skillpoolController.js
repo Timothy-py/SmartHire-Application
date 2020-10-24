@@ -98,29 +98,8 @@ exports.getSkillpoolUser = async function(req, res, next) {
 }
 
 // API Endpoint for Creating a Skillpool for a department
-exports.postSkillpoolCreate = [
-    
-    [
-        // check validations
-        check('skillpoolName')
-        .isLength({
-            min: 3,
-            max: 35
-        }).withMessage('Skillpool Name must be between 3 and 25 characters long')
-        .not().isEmpty().withMessage('Skillpool Name cannot be empty'),
-        
-    ],
-    
-    async function(req, res, next) {
-        // checks for validations
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({
-                status: false,
-                errors: errors.array()
-            });
-    }
-    
+exports.postSkillpoolCreate = async (req, res, next) => {
+
     console.log(`User ID ${req.user.id}`);
     console.log(`Department Id ${req.user.DepartmentId}`)
     console.log(`CurrentBusinessId ${req.user.CurrentBusinessId}`)
@@ -134,12 +113,6 @@ exports.postSkillpoolCreate = [
             UserId: req.user.id
         })
         
-        // res.json({
-        //     message: `Skillpool Created Successfully for Department: ${req.user.DepartmentId}`,
-        //     data: skillpool,
-        //     status: true
-        // })
-        
         req.flash('message', 'Skillpool Created Successfully')
         
         res.redirect('/smarthire/main/skillpool');
@@ -152,9 +125,8 @@ exports.postSkillpoolCreate = [
                 status: false
             })
         }
-    
-    }    
-];
+
+};
 
 
 // Endpoint for Deleting Skillpool for a Department
