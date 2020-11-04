@@ -3,7 +3,7 @@ const http = require("http");
 const app = require("../server")
 
 
-const port = parseInt(process.env.PORT, 10) || 8000;
+const port = parseInt(process.env.PORT, 10) || 4000;
 app.set('port', port);
 
 

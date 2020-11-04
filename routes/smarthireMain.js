@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var {ensureAuthenticated} = require("../config/auth");
 
 
 var goalController = require("../smarthireControllers/goalController");
@@ -18,7 +19,7 @@ console.log("I am in SMART HIRE main routes");
 
 router.get('/', indexController.getLogin);
 
-router.get('/home', indexController.getIndex);
+router.get('/home', ensureAuthenticated, indexController.getIndex);
 
 router.get('/goals', goalController.getGoals);
 

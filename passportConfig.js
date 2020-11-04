@@ -12,7 +12,6 @@ function isValidPassword(userpass, password) {
 
 function initialize(passport) {
     console.log("Initializing passport...");
-    var msgs = {};
 
     passport.use('local', new Strategy({
         usernameField: 'email',
@@ -30,14 +29,14 @@ function initialize(passport) {
             if (!user) {
                 console.log("User not found!")
                 // msgs.push("No User with that email address found")
-                msgs.message = "No User with that email address found"
+                // msgs.message = "No User with that email address found"
                 return done(null, false, {message: "No user with that email address"})
             }
 
             if (!isValidPassword(user.password, password)) {
                 console.log("Password is incorrect")
                 // msgs.push("Password is incorrect")
-                msgs.message = "Password is incorrect"
+                // msgs.message = "Password is incorrect"
                 return done(null, false, msgs);
             }
 
@@ -46,8 +45,8 @@ function initialize(passport) {
             console.log(userinfo)
 
             // msgs.push("User Logged in successfully");
-            msgs.message = "User Logged in successfully"
-            return done(null, userinfo, msgs);
+            // msgs.message = "User Logged in successfully"
+            return done(null, userinfo);
 
         }).catch((err)=>{
 
@@ -67,7 +66,7 @@ function initialize(passport) {
             console.log("User deserialized successfully")
             if (user) {
 
-                return done(null, user, msgs)
+                return done(null, user)
             } else {
                 return done(null, false)
             }

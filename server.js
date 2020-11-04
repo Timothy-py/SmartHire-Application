@@ -12,9 +12,10 @@ var flash = require("connect-flash");
 
 
 // require routes
-const index = require("./routes/index");
+// const index = require("./routes/index");
 // const api =  require("./routes/api");
 const main = require("./routes/smarthireMain");
+const { json } = require("body-parser");
 
 // initialize express
 var app = express();
@@ -42,21 +43,67 @@ app.set('trust proxy', 1)
 // authenticate user with passport
 initializePassport(passport);
 // user passport middleware
+
+
+// use routes
+// app.use('/', index);
+app.use('/smarthire/main', main);
+
+
+// store user session data
+// for flash messages
+var expiryDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 app.use(passport.initialize());
 app.use(passport.session());
 app.set('passport', passport);
 
-// use routes
-app.use('/', index);
-app.use('/smarthire/main', main);
+app.use(
+    session({
+        secret: 'secret',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            secureProxy: true,
+            maxAge: expiryDate
+        }
+    })
+);
+
 
 // User Login
 app.post('/login', passport.authenticate("local", { 
     failureRedirect: '/smarthire/main'
-    }), (req, res)=>{   
-        res.redirect('/smarthire/main/home')
+    }), (req, res, next)=>{
+        console.log(`USERNAME: ${req.user.username}`)
+        console.log(`SESSION DATA: ${req.user.RoleId}`)   
+        res.redirect('./smarthire/main/home')
     }
 );
+
+// app.post('/login', (req, res, next)=>{
+//     passport.authenticate('local', (err, userinfo)=>{
+//         if (err) {
+//             return next(err);
+//         }
+//         if(!userinfo){
+//             return res.status(409).send({message: "NO USER FOUND!"})
+//         }
+//         req.login(userinfo, (err)=>{
+//             if(err){
+//                 console.log(err)
+//                 return next(err)
+//             }
+//             // next()
+//             res.redirect('/smarthire/main/home')
+//             // return next(userinfo)
+//         });
+//     })(req, res, next);
+// })
+
+
+app.get('/welcome', (req, res, next)=>{
+    res.status(200).send({message: `Welcome, Mr. ${req.user.username}`})
+})
 
 // User Logout
 app.get('/logout', (req, res, next)=>{
@@ -92,20 +139,7 @@ app.use((err, req, res, next)=>{
 }) 
 
 
-// store user session data
-// for flash messages
-app.use(
-    session({
-        secret: 'secret',
-        resave: false,
-        saveUninitialized: true,
-        cookie: {
-            secureProxy: true,
-            httpOnly: true,
-            domain: 'cookie.com'
-        }
-    })
-);
+
 
 // export the module
 module.exports = app;
