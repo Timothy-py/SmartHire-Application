@@ -52,7 +52,6 @@ app.use('/smarthire/main', main);
 
 // store user session data
 // for flash messages
-var expiryDate = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 app.use(passport.initialize());
 app.use(passport.session());
 app.set('passport', passport);
@@ -63,8 +62,7 @@ app.use(
         resave: false,
         saveUninitialized: true,
         cookie: {
-            secureProxy: true,
-            maxAge: expiryDate
+            secureProxy: true
         }
     })
 );
@@ -73,40 +71,17 @@ app.use(
 // User Login
 app.post('/login', passport.authenticate("local", { 
     failureRedirect: '/smarthire/main'
-    }), (req, res, next)=>{
-        console.log(`USERNAME: ${req.user.username}`)
-        console.log(`SESSION DATA: ${req.user.RoleId}`)   
+    }), (req, res)=>{
+        // this console log output TRUE meaning user is authenticated already
+        // and console log of req.user log out user infos
+        console.log(`USER: ${req.isAuthenticated()}`)
         res.redirect('./smarthire/main/home')
     }
 );
 
-// app.post('/login', (req, res, next)=>{
-//     passport.authenticate('local', (err, userinfo)=>{
-//         if (err) {
-//             return next(err);
-//         }
-//         if(!userinfo){
-//             return res.status(409).send({message: "NO USER FOUND!"})
-//         }
-//         req.login(userinfo, (err)=>{
-//             if(err){
-//                 console.log(err)
-//                 return next(err)
-//             }
-//             // next()
-//             res.redirect('/smarthire/main/home')
-//             // return next(userinfo)
-//         });
-//     })(req, res, next);
-// })
-
-
-app.get('/welcome', (req, res, next)=>{
-    res.status(200).send({message: `Welcome, Mr. ${req.user.username}`})
-})
 
 // User Logout
-app.get('/logout', (req, res, next)=>{
+app.get('/logout', (req, res)=>{
     req.logout();
     res.redirect('/smarthire/main');
 })

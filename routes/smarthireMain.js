@@ -19,6 +19,8 @@ console.log("I am in SMART HIRE main routes");
 
 router.get('/', indexController.getLogin);
 
+// console log of req.isAuthenticated() is logging out false here
+// req object is not authenticated and req.user outputs error
 router.get('/home', ensureAuthenticated, indexController.getIndex);
 
 router.get('/goals', goalController.getGoals);
