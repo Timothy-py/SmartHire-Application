@@ -1,6 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const bodyParser =  require("body-parser");
+const cookieParser = require("cookie-parser")
 var path =  require('path');
 const bcrypt = require('bcrypt');
 const session =  require('cookie-session');
@@ -15,7 +16,7 @@ var flash = require("connect-flash");
 // const index = require("./routes/index");
 // const api =  require("./routes/api");
 const main = require("./routes/smarthireMain");
-const { json } = require("body-parser");
+// const { json } = require("body-parser");
 
 // initialize express
 var app = express();
@@ -34,6 +35,8 @@ app.use(logger("dev"));
 // parse incoming requests data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+// app.use(express.json())
+app.use(cookieParser())
 
 // trust first proxy
 app.set('trust proxy', 1)
@@ -44,22 +47,20 @@ app.set('trust proxy', 1)
 initializePassport(passport);
 // user passport middleware
 
-
-// use routes
-// app.use('/', index);
-app.use('/smarthire/main', main);
-
-
 // store user session data
 // for flash messages
 app.use(passport.initialize());
 app.use(passport.session());
 app.set('passport', passport);
 
+// use routes
+// app.use('/', index);
+app.use('/smarthire/main', main);
+
 app.use(
     session({
         secret: 'secret',
-        resave: false,
+        resave: true,
         saveUninitialized: true,
         cookie: {
             secureProxy: true
@@ -67,14 +68,12 @@ app.use(
     })
 );
 
-
 // User Login
 app.post('/login', passport.authenticate("local", { 
     failureRedirect: '/smarthire/main'
     }), (req, res)=>{
-        // this console log output TRUE meaning user is authenticated already
-        // and console log of req.user log out user infos
         console.log(`USER: ${req.isAuthenticated()}`)
+        console.log(req.cookies)
         res.redirect('./smarthire/main/home')
     }
 );
@@ -118,3 +117,8 @@ app.use((err, req, res, next)=>{
 
 // export the module
 module.exports = app;
+
+
+// use express-session instead of cookie-session
+// use express for parsing json by app.use(express.json) instead of bodyParser
+// use cookie-parser
